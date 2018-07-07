@@ -1,0 +1,37 @@
+  # requirements
+# program that takes a POST with a comma-separated list of strings
+# representing URLs
+# retrieves the text at the URLS, and writes non-integer characters to one file,
+# and integer characters to another.
+
+# Overall structure
+#   main:
+#     instantiate the http server
+#     for any request, pass on to a handler
+#     return response from server
+#
+#   handler
+#     parse request body
+#     pass request on to client
+#     take text from client and pass to text parser
+#
+#   http server
+#     accept requests and pass on to handler
+#
+#   text parser
+#     instantiates a concurrency safe chars queue for data from URLs
+#     instantiates a concurrency safe integers queue for data from URLs
+#     instantiates an http client
+#
+#     start a loop that reads off the integers queue and writes to an integers file
+#     start a loop that reads off the chars queue and writes to a chars file
+#
+#     register close handler to close file handles
+#
+#     retrieve_all: method that takes a collection of strings, turns those into URLs, and then calls a retrieve method on all,
+#                   concurrently
+#     retrieve: takes a url, retrieves the text
+#
+#     in each retrieve routine, split the text into integers and non-integers
+#     dump the integers into the integers queue, and non-integers into the non-integers queue
+#
